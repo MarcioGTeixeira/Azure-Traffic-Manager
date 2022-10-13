@@ -1,0 +1,40 @@
+#utilizando pool de agente auto hospedado
+pool:
+  name: local
+
+#instalando ultima versao do terraform
+steps:
+- task: TerraformInstaller@0
+  displayName: "terraform install latest"
+  inputs:
+    terraformVersion: 'latest'
+
+
+# inicializando o terraform
+- task: TerraformTaskV3@3
+  displayName: " terraform init"
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    backendServiceArm: ''
+    backendAzureRmResourceGroupName: ''
+    backendAzureRmStorageAccountName: ''
+    backendAzureRmContainerName: ''
+    backendAzureRmKey: ''
+
+# validando configuração da infraestrutura
+- task: TerraformTaskV3@3
+  displayName: 'terraform validate'
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+
+# instalando python e brideCrew para análise do código
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: 'x.x.x'
+  displayName: 'Install Python x.x.x'
+- script: pip install bridgecrew
+  displayName: 'Install the Bridgecrew CLI'
+- script: bridgecrew -d <directory> --bc-api-key <key> --repo-id <org/repo>  --branch <branch>
+  displayName: 'Scan with Bridgecrew'
