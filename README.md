@@ -6,7 +6,7 @@
 - Projeto - implantar infraestrutura de WebApp, em 3 regiões: Brasil South , East US, Uk South, com redirecionamento geográfico com Traffic Manager. Cada usuário será redirecionado ao endpoint configurado para sua região.
 
 ### Configuração do arquivo azurepipelines.yaml
-- A pipeline utiliza um self-hosted agent , podendo ser alterada para utilizar um Microsfot-hosted agents
+- A pipeline utiliza um self-hosted agent , podendo ser alterada para utilizar um Microsoft-hosted agents
 
 Obs: Para utilização do BridgeCrew, é necessário ter uma conta criada e referenciar a API Key conforme task, e também pode ser utilizado como módulo, sendo referenciado no arquivo main.tf
 
